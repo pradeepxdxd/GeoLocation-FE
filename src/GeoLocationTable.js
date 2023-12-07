@@ -18,6 +18,8 @@ export default function GeoLocationTable({ data }) {
         createData('City', data?.addressLocality),
         createData('State', data?.addressRegion),
         createData('Pin Code', data?.postalCode),
+        createData('Latitude', data?.latitude),
+        createData('Longitude', data?.longitude),
     ];
     return (
         data && (<>
