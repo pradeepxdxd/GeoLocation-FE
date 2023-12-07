@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import GeoLocationTable from './GeoLocationTable'
 
 function App() {
+  const [data, setData] = useState()
+
+  const fetchGeoLocation = async () => {
+    const response = await fetch('https://pradeep-geo-location.onrender.com/');
+    return response;
+  }
+
+  useEffect(() => {
+    fetchGeoLocation()
+      .then(res => res.json())
+      .then(data => setData(data))
+      .catch(err => console.log(err))
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <GeoLocationTable data={data} />
+      </div>
+
+    </>
   );
 }
 
